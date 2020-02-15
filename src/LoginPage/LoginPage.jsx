@@ -118,7 +118,7 @@ function LoginPage() {
                             </FormControl>
                             <Box my={5} style={{ textAlign: "center" }}>
                                 <Button variant="contained" color="secondary">
-                                    Connexion
+                                    Se connecter
                                 </Button>
                             </Box>
                         </Box>

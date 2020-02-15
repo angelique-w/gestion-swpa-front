@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
@@ -35,7 +36,8 @@ const useStyles = makeStyles(theme => ({
         transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
-        })
+        }),
+        backgroundColor: theme.palette.primary.dark
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -73,6 +75,7 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up("sm")]: {
             width: theme.spacing(9) + 1
         }
+        // backgroundColor: theme.palette.primary.main
     },
     toolbar: {
         display: "flex",
@@ -199,18 +202,22 @@ export default function Header({ children }) {
                 </div>
                 <Divider />
                 <List>
-                    <ListItem button key="Membres">
-                        <ListItemIcon>
-                            <GroupIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Membres" />
-                    </ListItem>
-                    <ListItem button key="Prestations">
-                        <ListItemIcon>
-                            <EventIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Prestations" />
-                    </ListItem>
+                    <Link to="/membres">
+                        <ListItem button key="Membres">
+                            <ListItemIcon>
+                                <GroupIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Membres" />
+                        </ListItem>
+                    </Link>
+                    <Link to="/prestations">
+                        <ListItem button key="Prestations">
+                            <ListItemIcon>
+                                <EventIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Prestations" />
+                        </ListItem>
+                    </Link>
                 </List>
             </Drawer>
             <main className={classes.content}>
