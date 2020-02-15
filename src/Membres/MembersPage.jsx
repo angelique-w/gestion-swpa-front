@@ -24,24 +24,30 @@ const useStyles = makeStyles({
 });
 
 const columns = [
-    { id: "firstname", label: "Prénom", align: "left", minWidth: 170 },
-    { id: "lastname", label: "Nom", align: "left", minWidth: 170 },
+    { id: "firstname", label: "Prénom", align: "left", minWidth: 130 },
+    { id: "lastname", label: "Nom", align: "left", minWidth: 130 },
     {
         id: "numberTel",
         label: "Téléphone",
-        minWidth: 170,
+        minWidth: 150,
         align: "left"
     },
     {
         id: "mail",
         label: "E-mail",
-        minWidth: 170,
+        minWidth: 200,
+        align: "left"
+    },
+    {
+        id: "adress",
+        label: "Adresse",
+        minWidth: 130,
         align: "left"
     },
     {
         id: "role",
         label: "Rôle",
-        minWidth: 170,
+        minWidth: 130,
         align: "left"
     }
 ];
@@ -131,6 +137,12 @@ function MembersPage() {
                                             align="left"
                                         >
                                             ang.wns@gmail.com
+                                        </TableCell>
+                                        <TableCell
+                                            key={Math.random()}
+                                            align="left"
+                                        >
+                                            Boucau
                                         </TableCell>
                                         <TableCell
                                             key={Math.random()}

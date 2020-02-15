@@ -167,9 +167,11 @@ export default function Header({ children }) {
                                 open={isMenuOpen}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleClose}>
-                                    Mon compte
-                                </MenuItem>
+                                <Link to="/monCompte">
+                                    <MenuItem onClick={handleClose}>
+                                        Mon compte
+                                    </MenuItem>
+                                </Link>
                                 <MenuItem onClick={handleClose}>
                                     Déconnexion
                                 </MenuItem>
