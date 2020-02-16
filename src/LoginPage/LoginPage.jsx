@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
     titleConnexion: {
         textAlign: "center",
         paddingTop: 30
+    },
+    card: {
+        marginTop: 80
     }
 }));
 
@@ -57,7 +60,7 @@ function LoginPage() {
     return (
         <Layout>
             <div className={classes.root}>
-                <Card>
+                <Card className={classes.card}>
                     <CardContent>
                         <Typography
                             variant="h4"

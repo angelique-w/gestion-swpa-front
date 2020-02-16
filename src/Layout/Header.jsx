@@ -31,13 +31,21 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexGrow: 1
     },
+    bandHeader: {
+        height: "20px",
+        backgroundColor: theme.palette.primary.dark
+    },
+    bandDrawer: {
+        height: "20px",
+        backgroundColor: theme.palette.secondary.dark
+    },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
         }),
-        backgroundColor: theme.palette.primary.dark
+        backgroundColor: theme.palette.primary.main
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -82,6 +90,16 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         justifyContent: "flex-end",
         padding: theme.spacing(0, 1),
+        height: "20px",
+        ...theme.mixins.toolbar
+    },
+    toolbarLeft: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        padding: theme.spacing(0, 1),
+        height: "20px",
+        backgroundColor: theme.palette.secondary.main,
         ...theme.mixins.toolbar
     },
     content: {
@@ -126,6 +144,7 @@ export default function Header({ children }) {
                     [classes.appBarShift]: open
                 })}
             >
+                <div className={classes.bandHeader}></div>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -193,7 +212,8 @@ export default function Header({ children }) {
                     })
                 }}
             >
-                <div className={classes.toolbar}>
+                <div className={classes.bandDrawer}></div>
+                <div className={classes.toolbarLeft}>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === "rtl" ? (
                             <ChevronRightIcon />

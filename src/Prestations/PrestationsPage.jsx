@@ -16,10 +16,14 @@ import Layout from "../Layout/Layout";
 const useStyles = makeStyles(theme => ({
     root: {
         // backgroundColor: theme.palette.secondary.main
+        // width: "100%"
     },
     card: {
         // backgroundColor: theme.palette.primary.main
     }
+    // containerTitle: {
+    //     backgroundColor: theme.palette.primary.main
+    // }
 }));
 
 function PrestationsPage() {
@@ -28,7 +32,7 @@ function PrestationsPage() {
     return (
         <Layout>
             <div className={classes.root}>
-                <Box py={4}>
+                <Box py={4} className={classes.containerTitle}>
                     <Typography variant="h4" align="center">
                         Prestations
                     </Typography>

@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
         minWidth: 400,
         maxWidth: 800,
         margin: "auto"
+    },
+    card: {
+        marginTop: 80
     }
 }));
 
@@ -32,7 +35,7 @@ function MyAccountPage() {
     return (
         <Layout>
             <div className={classes.root}>
-                <Card>
+                <Card className={classes.card}>
                     <CardContent>
                         <Box py={4}>
                             <Typography variant="h4" align="center">

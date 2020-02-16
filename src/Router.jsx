@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Switch } from "react-router-dom";
 import AdminPage from "./AdminPage/AdminPage";
 import LoginPage from "./LoginPage/LoginPage";
 import PrestationsPage from "./Prestations/PrestationsPage";
+import FichePrestation from "./Prestations/FichePrestation";
 import MyAccountPage from "./MyAccount/MyAccountPage";
 import MembersPage from "./Membres/MembersPage";
 
@@ -13,6 +14,7 @@ function Router() {
             <Switch>
                 <Route exact path="/" component={LoginPage} />
                 <Route path="/prestations" component={PrestationsPage} />
+                <Route path="/ficheprestation" component={FichePrestation} />
                 <Route path="/membres" component={MembersPage} />
                 <Route path="/monCompte" component={MyAccountPage} />
                 <Route path="/admin" component={AdminPage} />
