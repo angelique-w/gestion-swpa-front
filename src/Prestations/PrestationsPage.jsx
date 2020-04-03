@@ -8,19 +8,20 @@ import {
     CardContent,
     Divider,
     Grid,
-    Box
+    Box,
 } from "@material-ui/core";
 
 import Layout from "../Layout/Layout";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-        // backgroundColor: theme.palette.secondary.main
+        // backgroundColor: theme.palette.secondary.main,
         // width: "100%"
+        color: theme.palette.primary.text,
     },
     card: {
         // backgroundColor: theme.palette.primary.main
-    }
+    },
     // containerTitle: {
     //     backgroundColor: theme.palette.primary.main
     // }
@@ -32,10 +33,11 @@ function PrestationsPage() {
     return (
         <Layout>
             <div className={classes.root}>
-                <Box py={4} className={classes.containerTitle}>
-                    <Typography variant="h4" align="center">
+                <Box py={5} className={classes.containerTitle}>
+                    <Typography variant="h4" align="start">
                         Prestations
                     </Typography>
+                    <Divider />
                 </Box>
                 <Box mb={5}>
                     <Grid container spacing={2}>
