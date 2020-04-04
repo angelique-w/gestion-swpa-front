@@ -2,161 +2,107 @@ import React from "react";
 import {
     Typography,
     Box,
-    TableContainer,
-    Table,
-    TableHead,
-    TableRow,
     Paper,
-    TableBody,
-    TableCell,
-    makeStyles
+    makeStyles,
+    Divider,
+    AppBar,
+    Tabs,
+    Tab,
 } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 import Layout from "../Layout/Layout";
+import MembersList from "./MembersList";
+import ChangeMyDetails from "./ChangeMyDetails";
 
-const useStyles = makeStyles({
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <Typography
+            component="div"
+            role="tabpanel"
+            hidden={value !== index}
+            id={`scrollable-force-tabpanel-${index}`}
+            aria-labelledby={`scrollable-force-tab-${index}`}
+            {...other}
+        >
+            {value === index && <Box p={3}>{children}</Box>}
+        </Typography>
+    );
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `scrollable-force-tab-${index}`,
+        "aria-controls": `scrollable-force-tabpanel-${index}`,
+    };
+}
+
+const useStyles = makeStyles((theme) => ({
     root: {
-        width: "100%"
+        color: theme.palette.primary.text,
     },
-    container: {
-        maxHeight: 550
-    }
-});
-
-const columns = [
-    { id: "firstname", label: "Prénom", align: "left", minWidth: 130 },
-    { id: "lastname", label: "Nom", align: "left", minWidth: 130 },
-    {
-        id: "numberTel",
-        label: "Téléphone",
-        minWidth: 150,
-        align: "left"
+    paper: {
+        width: "100%",
     },
-    {
-        id: "mail",
-        label: "E-mail",
-        minWidth: 200,
-        align: "left"
-    },
-    {
-        id: "adress",
-        label: "Adresse",
-        minWidth: 130,
-        align: "left"
-    },
-    {
-        id: "role",
-        label: "Rôle",
-        minWidth: 130,
-        align: "left"
-    }
-];
+}));
 
 function MembersPage() {
     const classes = useStyles();
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
     return (
         <Layout>
-            <Box py={4}>
-                <Typography variant="h4" align="center">
-                    Liste des membres
-                </Typography>
-            </Box>
-            <Box mb={5}>
-                <Paper className={classes.root}>
-                    <TableContainer className={classes.container}>
-                        <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
-                                    {columns.map(column => (
-                                        <TableCell
-                                            key={column.id}
-                                            align={column.align}
-                                            style={{
-                                                minWidth: column.minWidth
-                                            }}
-                                        >
-                                            {column.label}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {[
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1,
-                                    1
-                                ].map(() => (
-                                    <TableRow
-                                        hover
-                                        tabIndex={-1}
-                                        key={Math.random()}
-                                    >
-                                        <TableCell
-                                            key={Math.random()}
-                                            align="left"
-                                        >
-                                            Angélique
-                                        </TableCell>
-                                        <TableCell
-                                            key={Math.random()}
-                                            align="left"
-                                        >
-                                            Wons
-                                        </TableCell>
-                                        <TableCell
-                                            key={Math.random()}
-                                            align="left"
-                                        >
-                                            06 06 06 06 06
-                                        </TableCell>
-                                        <TableCell
-                                            key={Math.random()}
-                                            align="left"
-                                        >
-                                            ang.wns@gmail.com
-                                        </TableCell>
-                                        <TableCell
-                                            key={Math.random()}
-                                            align="left"
-                                        >
-                                            Boucau
-                                        </TableCell>
-                                        <TableCell
-                                            key={Math.random()}
-                                            align="left"
-                                        >
-                                            elève piper
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Paper>
-            </Box>
+            <div className={classes.root}>
+                <Box py={4}>
+                    <Typography variant="h4" align="start">
+                        Membres
+                    </Typography>
+                    <Divider />
+                </Box>
+                <Box mb={5}>
+                    <AppBar position="static" color="default">
+                        <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            variant="scrollable"
+                            scrollButtons="on"
+                            indicatorColor="secondary"
+                            textColor="secondary"
+                            aria-label="members"
+                        >
+                            <Tab
+                                label="Liste des membres"
+                                // icon={<ListIcon />}
+                                {...a11yProps(0)}
+                            />
+                            <Tab
+                                label="Modifer mes coordonnées"
+                                // icon={<FavoriteIcon />}
+                                {...a11yProps(1)}
+                            />
+                        </Tabs>
+                    </AppBar>
+                    <Paper className={classes.paper}>
+                        <TabPanel value={value} index={0}>
+                            <MembersList />
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                            <ChangeMyDetails />
+                        </TabPanel>
+                    </Paper>
+                </Box>
+            </div>
         </Layout>
     );
 }
