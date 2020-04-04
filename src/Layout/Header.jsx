@@ -14,15 +14,14 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    Menu,
-    MenuItem,
+    Button,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import GroupIcon from "@material-ui/icons/Group";
 import EventIcon from "@material-ui/icons/Event";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const drawerWidth = 240;
 
@@ -31,14 +30,6 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexGrow: 1,
     },
-    // bandHeader: {
-    //     height: "20px",
-    //     backgroundColor: theme.palette.primary.dark,
-    // },
-    // bandDrawer: {
-    //     height: "20px",
-    //     backgroundColor: theme.palette.secondary.dark,
-    // },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(["width", "margin"], {
@@ -111,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    buttonLogout: {
+        margin: theme.spacing(1),
+    },
 }));
 
 export default function Header({ children }) {
@@ -118,8 +112,6 @@ export default function Header({ children }) {
     const theme = useTheme();
     const [auth, setAuth] = React.useState(true);
     const [open, setOpen] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const isMenuOpen = Boolean(anchorEl);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -129,13 +121,7 @@ export default function Header({ children }) {
         setOpen(false);
     };
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const handleLogout = () => {};
 
     return (
         <div className={classes.root}>
@@ -164,39 +150,14 @@ export default function Header({ children }) {
                     </Typography>
                     {auth && (
                         <div>
-                            <IconButton
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
+                            <Button
+                                className={classes.button}
+                                endIcon={<ExitToAppIcon />}
+                                color="secondary"
+                                size="large"
                             >
-                                <AccountCircle fontSize="large" />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: "top",
-                                    horizontal: "right",
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: "top",
-                                    horizontal: "right",
-                                }}
-                                open={isMenuOpen}
-                                onClose={handleClose}
-                            >
-                                <Link to="/monCompte">
-                                    <MenuItem onClick={handleClose}>
-                                        Mon compte
-                                    </MenuItem>
-                                </Link>
-                                <MenuItem onClick={handleClose}>
-                                    Déconnexion
-                                </MenuItem>
-                            </Menu>
+                                Déconnexion
+                            </Button>
                         </div>
                     )}
                 </Toolbar>
