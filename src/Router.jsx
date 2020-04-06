@@ -1,10 +1,8 @@
 import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 
-import AdminPage from "./AdminPage/AdminPage";
 import LoginPage from "./LoginPage/LoginPage";
 import PrestationsPage from "./Prestations/PrestationsPage";
-import FichePrestation from "./Prestations/FichePrestation";
 import MembersPage from "./Membres/MembersPage";
 
 function Router() {
@@ -13,9 +11,7 @@ function Router() {
             <Switch>
                 <Route exact path="/" component={LoginPage} />
                 <Route path="/prestations" component={PrestationsPage} />
-                <Route path="/ficheprestation" component={FichePrestation} />
                 <Route path="/membres" component={MembersPage} />
-                <Route path="/admin" component={AdminPage} />
             </Switch>
         </BrowserRouter>
     );

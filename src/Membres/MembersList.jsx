@@ -7,7 +7,19 @@ import {
     TableBody,
     TableCell,
     makeStyles,
+    withStyles,
 } from "@material-ui/core";
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: "#4d78ab",
+        color: theme.palette.common.white,
+        fontSize: 14,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -38,7 +50,13 @@ const columns = [
     },
     {
         id: "role",
-        label: "Rôle",
+        label: "Rôle musical",
+        minWidth: 130,
+        align: "left",
+    },
+    {
+        id: "function admin",
+        label: "Fonction amdinistrative",
         minWidth: 130,
         align: "left",
     },
@@ -52,7 +70,7 @@ function MembersList() {
                 <TableHead>
                     <TableRow>
                         {columns.map((column) => (
-                            <TableCell
+                            <StyledTableCell
                                 key={column.id}
                                 align={column.align}
                                 style={{
@@ -60,7 +78,7 @@ function MembersList() {
                                 }}
                             >
                                 {column.label}
-                            </TableCell>
+                            </StyledTableCell>
                         ))}
                     </TableRow>
                 </TableHead>
@@ -94,24 +112,27 @@ function MembersList() {
                         1,
                     ].map(() => (
                         <TableRow hover tabIndex={-1} key={Math.random()}>
-                            <TableCell key={Math.random()} align="left">
+                            <StyledTableCell key={Math.random()} align="left">
                                 Angélique
-                            </TableCell>
-                            <TableCell key={Math.random()} align="left">
+                            </StyledTableCell>
+                            <StyledTableCell key={Math.random()} align="left">
                                 Wons
-                            </TableCell>
-                            <TableCell key={Math.random()} align="left">
+                            </StyledTableCell>
+                            <StyledTableCell key={Math.random()} align="left">
                                 06 06 06 06 06
-                            </TableCell>
-                            <TableCell key={Math.random()} align="left">
+                            </StyledTableCell>
+                            <StyledTableCell key={Math.random()} align="left">
                                 ang.wns@gmail.com
-                            </TableCell>
-                            <TableCell key={Math.random()} align="left">
+                            </StyledTableCell>
+                            <StyledTableCell key={Math.random()} align="left">
                                 Boucau
-                            </TableCell>
-                            <TableCell key={Math.random()} align="left">
+                            </StyledTableCell>
+                            <StyledTableCell key={Math.random()} align="left">
                                 elève piper
-                            </TableCell>
+                            </StyledTableCell>
+                            <StyledTableCell key={Math.random()} align="left">
+                                webmaster
+                            </StyledTableCell>
                         </TableRow>
                     ))}
                 </TableBody>

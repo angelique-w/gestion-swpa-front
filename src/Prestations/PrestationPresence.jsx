@@ -15,34 +15,32 @@ import {
     TextField,
     FormGroup,
     Checkbox,
-    Button
+    Button,
+    CardContent,
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import Layout from "../Layout/Layout";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        // backgroundColor: theme.palette.secondary.main
-        // width: "100%"
-    },
-    card: {
-        // backgroundColor: theme.palette.primary.main
-    },
-    // containerTitle: {
-    //     backgroundColor: theme.palette.primary.main
-    // }
+const useStyles = makeStyles((theme) => ({
     formControl: {
-        margin: theme.spacing(3)
+        margin: theme.spacing(3),
     },
     select: {
-        // margin: theme.spacing(1),
         marginBottom: theme.spacing(5),
-        minWidth: 250
-    }
+        minWidth: 250,
+    },
+    btnValider: {
+        marginTop: "10px",
+        backgroundColor: theme.palette.primary.dark,
+        color: theme.palette.primary.contrastText,
+        "&:hover": {
+            backgroundColor: theme.palette.primary.light,
+        },
+    },
 }));
 
-function FichePrestation() {
+function PrestationPresence() {
     const classes = useStyles();
     const [presence, setPresence] = useState("");
     const [accompagnants, setAccompagnants] = useState("");
@@ -50,76 +48,33 @@ function FichePrestation() {
     const [NbAccompagnants, setNbAccompagnants] = useState(0);
     const [voiture, setVoiture] = useState(false);
 
-    const handleChangePresence = event => {
+    const handleChangePresence = (event) => {
         setPresence(event.target.value);
     };
 
-    const handleChangeAccompagnants = event => {
+    const handleChangeAccompagnants = (event) => {
         setAccompagnants(event.target.value);
     };
 
-    const handleChangeRole = event => {
+    const handleChangeRole = (event) => {
         setRole(event.target.value);
     };
 
-    const handleChangeNbAccompagnants = event => {
+    const handleChangeNbAccompagnants = (event) => {
         setNbAccompagnants(event.target.value);
     };
 
-    const handleChangeVoiture = event => {
+    const handleChangeVoiture = (event) => {
         setVoiture(!voiture);
     };
 
     return (
-        <Layout>
-            <Box py={4} className={classes.containerTitle}>
-                <Typography variant="h4" align="center">
-                    Fiche prestation
-                </Typography>
-            </Box>
-            <Box>
-                <IconButton>
-                    <ArrowBackIcon fontSize="large" />
-                </IconButton>
-            </Box>
-            <Box my={5} mx={5} width="100%">
-                <Box mx={3}>
-                    <Typography
-                        variant="body1"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Ville
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Date
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Heure d'arrivée
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Plus de détails...
-                    </Typography>
-                </Box>
-                <Grid
-                    // xs={6}
-                    container
-                    // direction="column"
-                    // justify="center"
-                    // alignItems="center"
-                >
+        <CardContent>
+            <IconButton>
+                <ArrowBackIcon fontSize="large" color="primary" />
+            </IconButton>
+            <Box width="100%">
+                <Grid container>
                     <Grid item xs={12}>
                         <FormControl
                             component="fieldset"
@@ -159,7 +114,7 @@ function FichePrestation() {
                                                     onChange={handleChangeRole}
                                                     inputProps={{
                                                         name: "role",
-                                                        id: "role"
+                                                        id: "role",
                                                     }}
                                                 >
                                                     <option value="" />
@@ -217,7 +172,7 @@ function FichePrestation() {
                                                 inputProps={{
                                                     min: "0",
                                                     max: "5",
-                                                    step: "1"
+                                                    step: "1",
                                                 }}
                                                 className={classes.select}
                                             />
@@ -248,13 +203,17 @@ function FichePrestation() {
                     </Grid>
                 </Grid>
             </Box>
-            <Box textAlign="center" mb={5}>
-                <Button variant="contained" color="secondary">
+            <Box textAlign="center" mt={5}>
+                <Button
+                    fullWidth
+                    variant="contained"
+                    className={classes.btnValider}
+                >
                     Valider
                 </Button>
             </Box>
-        </Layout>
+        </CardContent>
     );
 }
 
-export default FichePrestation;
+export default PrestationPresence;

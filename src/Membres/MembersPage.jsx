@@ -9,11 +9,13 @@ import {
     Tabs,
     Tab,
 } from "@material-ui/core";
+import WorkIcon from "@material-ui/icons/Work";
 import PropTypes from "prop-types";
 
 import Layout from "../Layout/Layout";
 import MembersList from "./MembersList";
 import ChangeMyDetails from "./ChangeMyDetails";
+import MembersManagement from "./MembersManagement";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -81,15 +83,15 @@ function MembersPage() {
                             textColor="secondary"
                             aria-label="members"
                         >
-                            <Tab
-                                label="Liste des membres"
-                                // icon={<ListIcon />}
-                                {...a11yProps(0)}
-                            />
+                            <Tab label="Liste des membres" {...a11yProps(0)} />
                             <Tab
                                 label="Modifer mes coordonnées"
-                                // icon={<FavoriteIcon />}
                                 {...a11yProps(1)}
+                            />
+                            <Tab
+                                label="Gestion des membres"
+                                icon={<WorkIcon />}
+                                {...a11yProps(2)}
                             />
                         </Tabs>
                     </AppBar>
@@ -99,6 +101,9 @@ function MembersPage() {
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <ChangeMyDetails />
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                            <MembersManagement />
                         </TabPanel>
                     </Paper>
                 </Box>

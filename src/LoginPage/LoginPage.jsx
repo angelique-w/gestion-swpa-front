@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(217, 217, 217, 0.8)",
+        backgroundColor: "rgba(245, 245, 245)",
         [theme.breakpoints.down("sm")]: {
             backgroundImage: `url(${logo})`,
             backgroundRepeat: "no-repeat",
@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     box: {
-        backgroundColor: "rgba(217, 217, 217, 0.8)",
+        // backgroundColor: "rgba(217, 217, 217, 0.8)",
+
         width: "960px",
         height: "639px",
         display: "flex",

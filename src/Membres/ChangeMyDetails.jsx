@@ -1,6 +1,6 @@
 import React from "react";
 import MaterialTable from "material-table";
-import { Paper } from "@material-ui/core";
+import { Chip } from "@material-ui/core";
 import { forwardRef } from "react";
 import Check from "@material-ui/icons/Check";
 import Clear from "@material-ui/icons/Clear";
@@ -20,10 +20,6 @@ function ChangeMyDetails() {
                 title: "Adresse",
                 field: "adresse",
             },
-            {
-                title: "Rôle",
-                field: "role",
-            },
         ],
         data: [
             {
@@ -32,7 +28,6 @@ function ChangeMyDetails() {
                 telephone: "06 06 06 06 06",
                 email: "ang-wns@gmail.com",
                 adresse: "Boucau",
-                role: "piper",
             },
         ],
     });

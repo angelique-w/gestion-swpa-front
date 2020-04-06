@@ -18,6 +18,7 @@ const theme = createMuiTheme({
             // dark: "#008e76",
             light: "#00bfa5",
             main: "#008e76",
+            text: "#ffffff",
             contrastText: "#4a4a4a",
         },
         error: {
@@ -33,9 +34,8 @@ const theme = createMuiTheme({
             contrastText: "#4a4a4a",
         },
         info: {
-            light: "#b6e3ff",
-            main: "#82b1ff",
-            dark: "#4d82cb",
+            main: "#4d78ab",
+            text: "#ffffff",
             contrastText: "#4a4a4a",
         },
         success: {

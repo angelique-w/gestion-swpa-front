@@ -78,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
     },
+    linkMenu: {
+        textDecoration: "none",
+        color: theme.palette.primary.text,
+    },
     toolbar: {
         display: "flex",
         alignItems: "center",
@@ -187,20 +191,20 @@ export default function Header({ children }) {
                 </div>
                 <Divider />
                 <List>
-                    <Link to="/membres">
-                        <ListItem button key="Membres">
-                            <ListItemIcon>
-                                <GroupIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Membres" />
-                        </ListItem>
-                    </Link>
-                    <Link to="/prestations">
+                    <Link to="/prestations" className={classes.linkMenu}>
                         <ListItem button key="Prestations">
                             <ListItemIcon>
                                 <EventIcon />
                             </ListItemIcon>
                             <ListItemText primary="Prestations" />
+                        </ListItem>
+                    </Link>
+                    <Link to="/membres" className={classes.linkMenu}>
+                        <ListItem button key="Membres">
+                            <ListItemIcon>
+                                <GroupIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Membres" />
                         </ListItem>
                     </Link>
                 </List>
