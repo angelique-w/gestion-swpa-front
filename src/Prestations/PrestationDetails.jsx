@@ -30,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: theme.palette.info.light,
         },
     },
+    btnRetourModal: {
+        marginTop: "10px",
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
+        "&:hover": {
+            backgroundColor: theme.palette.primary.light,
+        },
+    },
     modal: {
         display: "flex",
         alignItems: "center",
@@ -43,14 +51,10 @@ const useStyles = makeStyles((theme) => ({
         overflowX: "auto",
         overflowY: "visible",
     },
-
-    tableContainer: {
-        // overflowX: "scroll",
-        // overflowY: "scroll",
+    thead: {
+        fontWeight: "bold",
     },
-    tableItem: {
-        margin: theme.spacing(2),
-    },
+    cellAcct: {},
 }));
 
 function PrestationDetails() {
@@ -139,21 +143,21 @@ function PrestationDetails() {
                                     direction="row"
                                     wrap="nowrap"
                                     spacing={2}
-                                    // className={classes.tableContainer}
                                 >
                                     <Grid item>
-                                        <TableContainer
-                                        // className={classes.tableContainer}
-                                        >
+                                        <TableContainer>
                                             <Table
                                                 aria-label="présences sortie"
-                                                // className={classes.tableItem}
+                                                size="small"
                                             >
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell
                                                             align="center"
                                                             colSpan={3}
+                                                            className={
+                                                                classes.thead
+                                                            }
                                                         >
                                                             Pipes
                                                         </TableCell>
@@ -187,12 +191,18 @@ function PrestationDetails() {
                                     </Grid>
                                     <Grid item>
                                         <TableContainer>
-                                            <Table aria-label="présences sortie">
+                                            <Table
+                                                aria-label="présences sortie"
+                                                size="small"
+                                            >
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell
                                                             align="center"
                                                             colSpan={3}
+                                                            className={
+                                                                classes.thead
+                                                            }
                                                         >
                                                             Snare
                                                         </TableCell>
@@ -215,12 +225,18 @@ function PrestationDetails() {
                                     </Grid>
                                     <Grid item>
                                         <TableContainer>
-                                            <Table aria-label="présences sortie">
+                                            <Table
+                                                aria-label="présences sortie"
+                                                size="small"
+                                            >
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell
                                                             align="center"
                                                             colSpan={3}
+                                                            className={
+                                                                classes.thead
+                                                            }
                                                         >
                                                             Tenor
                                                         </TableCell>
@@ -243,12 +259,18 @@ function PrestationDetails() {
                                     </Grid>
                                     <Grid item>
                                         <TableContainer>
-                                            <Table aria-label="présences sortie">
+                                            <Table
+                                                aria-label="présences sortie"
+                                                size="small"
+                                            >
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell
                                                             align="center"
                                                             colSpan={3}
+                                                            className={
+                                                                classes.thead
+                                                            }
                                                         >
                                                             Bass
                                                         </TableCell>
@@ -271,12 +293,18 @@ function PrestationDetails() {
                                     </Grid>
                                     <Grid item>
                                         <TableContainer>
-                                            <Table aria-label="présences sortie">
+                                            <Table
+                                                aria-label="présences sortie"
+                                                size="small"
+                                            >
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell
                                                             align="center"
                                                             colSpan={3}
+                                                            className={
+                                                                classes.thead
+                                                            }
                                                         >
                                                             Flag
                                                         </TableCell>
@@ -299,12 +327,18 @@ function PrestationDetails() {
                                     </Grid>
                                     <Grid item>
                                         <TableContainer>
-                                            <Table aria-label="présences sortie">
+                                            <Table
+                                                aria-label="présences sortie"
+                                                size="small"
+                                            >
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell
                                                             align="center"
                                                             colSpan={3}
+                                                            className={
+                                                                classes.thead
+                                                            }
                                                         >
                                                             Accompagnants
                                                         </TableCell>
@@ -312,7 +346,12 @@ function PrestationDetails() {
                                                 </TableHead>
                                                 <TableBody>
                                                     <TableRow>
-                                                        <TableCell align="right">
+                                                        <TableCell
+                                                            align="left"
+                                                            className={
+                                                                classes.cellAcct
+                                                            }
+                                                        >
                                                             2
                                                         </TableCell>
                                                     </TableRow>
@@ -329,7 +368,7 @@ function PrestationDetails() {
                                 >
                                     <Button
                                         variant="contained"
-                                        className={classes.btnRetour}
+                                        className={classes.btnRetourModal}
                                         onClick={handleCloseListParticipants}
                                     >
                                         Retour
