@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
     Drawer,
@@ -22,6 +24,8 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import GroupIcon from "@material-ui/icons/Group";
 import EventIcon from "@material-ui/icons/Event";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
+import { removeUserAuth } from "../reducers/actions";
 
 const drawerWidth = 240;
 
@@ -111,11 +115,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Header({ children }) {
+function Header({ children, removeUserAuth, isAuth }) {
     const classes = useStyles();
     const theme = useTheme();
-    const [auth, setAuth] = React.useState(true);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+
+    let history = useHistory();
+
+    useEffect(() => {
+        if (!isAuth) {
+            history.push("/");
+        }
+    }, [isAuth]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -125,7 +136,9 @@ export default function Header({ children }) {
         setOpen(false);
     };
 
-    const handleLogout = () => {};
+    const handleLogout = () => {
+        removeUserAuth();
+    };
 
     return (
         <div className={classes.root}>
@@ -152,18 +165,16 @@ export default function Header({ children }) {
                     <Typography variant="h5" className={classes.title} noWrap>
                         Piperade SWPA
                     </Typography>
-                    {auth && (
-                        <div>
-                            <Button
-                                className={classes.button}
-                                endIcon={<ExitToAppIcon />}
-                                color="secondary"
-                                size="large"
-                            >
-                                Déconnexion
-                            </Button>
-                        </div>
-                    )}
+
+                    <Button
+                        className={classes.button}
+                        endIcon={<ExitToAppIcon />}
+                        color="secondary"
+                        size="large"
+                        onClick={handleLogout}
+                    >
+                        Déconnexion
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -216,3 +227,17 @@ export default function Header({ children }) {
         </div>
     );
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeUserAuth: () => dispatch(removeUserAuth()),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.userAuthReducer.isAuth,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

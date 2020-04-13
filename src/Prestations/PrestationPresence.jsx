@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+// const getResData = await axios.get(
+//     `http://localhost:8000/usersPrestations/?UserUuid=147061fa-8994-4173-9ec0-501bdcc916b7&PrestationId=4`
+// );
+
 function PrestationPresence() {
     const classes = useStyles();
     const [presence, setPresence] = useState("");

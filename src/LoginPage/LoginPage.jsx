@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import clsx from "clsx";
+import axios from "axios";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
@@ -11,14 +14,15 @@ import {
     IconButton,
     TextField,
     Box,
-    Typography,
     Button,
 } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import logo_desk from "../Assets/logo_brouillard_desktop.jpg";
 import logo from "../Assets/logo_brouillard.jpg";
-import { findByLabelText } from "@testing-library/react";
+import apiUrl from "../utils/apiCall";
+
+import { storeUserAuth } from "../reducers/actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     box: {
-        // backgroundColor: "rgba(217, 217, 217, 0.8)",
-
         width: "960px",
         height: "639px",
         display: "flex",
@@ -44,30 +46,28 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         borderRadius: 6,
         boxShadow: "10px 10px 44px 0px rgba(0,0,0,0.64)",
+
         [theme.breakpoints.down("sm")]: {
             width: "90vw",
             height: "450px",
         },
         [theme.breakpoints.up("md")]: {
+            backgroundColor: "rgba(255, 255, 255)",
             backgroundImage: `url(${logo_desk})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "50% 100%",
         },
     },
-    titleConnexion: {
-        textAlign: "center",
-        paddingTop: 30,
-        color: theme.palette.primary.dark,
-    },
     card: {
-        backgroundColor: "transparent",
+        paddingTop: 30,
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
         borderColor: "rgba(217, 217, 217, 0.8)",
         width: "50%",
         [theme.breakpoints.down("sm")]: {
+            paddingTop: 70,
             width: "100%",
             height: "100%",
         },
-        // [theme.breakpoints.up("md")]: {},
     },
     btn: {
         backgroundColor: theme.palette.secondary.dark,
@@ -79,15 +79,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function LoginPage() {
+function LoginPage({ storeUserAuth, isAuth }) {
     const classes = useStyles();
-    const [connexionValues, setConnexionValues] = React.useState({
+    const [connexionValues, setConnexionValues] = useState({
         login: "",
         password: "",
         showPassword: false,
     });
 
-    const handleChange = (prop) => (event) => {
+    let history = useHistory();
+
+    useEffect(() => {
+        if (isAuth) {
+            history.push("/prestations");
+        }
+    }, [isAuth]);
+
+    const handleChangeConnexionValues = (prop) => (event) => {
         setConnexionValues({ ...connexionValues, [prop]: event.target.value });
     };
 
@@ -102,23 +110,34 @@ function LoginPage() {
         event.preventDefault();
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const pseudo = connexionValues.login;
+            const password = connexionValues.password;
+            const getResData = await axios.get(
+                `http://localhost:8000/auth/?pseudo=${pseudo}&password=${password}`
+            );
+
+            const userData = getResData.data;
+
+            storeUserAuth(userData);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <div className={classes.root}>
             <div className={classes.box}>
                 <Card className={classes.card} elevation={0}>
                     <CardContent>
-                        <Typography
-                            variant="h4"
-                            className={classes.titleConnexion}
-                        >
-                            Authentification
-                        </Typography>
                         <Box my={5} mx={2}>
                             <TextField
                                 id="standard-basic"
                                 label="Identifiant"
                                 value={connexionValues.login}
-                                onChange={handleChange("login")}
+                                onChange={handleChangeConnexionValues("login")}
                                 fullWidth
                             />
                         </Box>
@@ -141,7 +160,9 @@ function LoginPage() {
                                             : "password"
                                     }
                                     value={connexionValues.password}
-                                    onChange={handleChange("password")}
+                                    onChange={handleChangeConnexionValues(
+                                        "password"
+                                    )}
                                     endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton
@@ -167,8 +188,8 @@ function LoginPage() {
                                 <Button
                                     variant="contained"
                                     className={classes.btn}
-                                    // color="secondary"
                                     size="large"
+                                    onClick={(e) => handleSubmit(e)}
                                 >
                                     Se connecter
                                 </Button>
@@ -181,4 +202,16 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        storeUserAuth: (user) => dispatch(storeUserAuth(user)),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.userAuthReducer.isAuth,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
